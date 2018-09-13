@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase'
-import 'firebase/firestore';
+import { database } from '../firebase';
 
 import {
   View,
@@ -9,22 +8,13 @@ import {
   Button,
 } from 'react-native';
 
-const config = {
-  apiKey: "AIzaSyDOxOsa1yOK4EL_7pFTVUAkLiwe31jxXXU",
-  authDomain: "todo-e0cd0.firebaseapp.com",
-  databaseURL: "https://todo-e0cd0.firebaseio.com",
-  projectId: "todo-e0cd0",
-  storageBucket: "todo-e0cd0.appspot.com",
-  messagingSenderId: "863784504836"
-};
-const settings = { timestampsInSnapshots: true }
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-  firebase.firestore().settings(settings)
-}
 
-const db = firebase.firestore();
 
+
+
+database.settings({
+  timestampsInSnapshots: true
+})
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -34,7 +24,7 @@ export default class TodoList extends Component {
     }
 
     this.handleSubmit = (n) => {
-      const collection = db.collection("text")
+      const collection = database.collection("text")
       console.log('this is coooo', collection);
       //const { data } = this.state;
       collection.add({
