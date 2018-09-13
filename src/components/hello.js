@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import {
   View,
@@ -5,16 +7,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import TodoList from '../components/todo';
-import Hello from '../components/hello'
-
-export default class HomeScreen extends Component {
+export default class Hello extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I'm the HomeScreen component</Text>
-        <TodoList />
-        {/* <Hello /> */}
+        <Text>I'm the Hello component</Text>
       </View>
     );
   }
