@@ -40,13 +40,36 @@ export default class TodoList extends Component {
           console.error("Error adding document: ", error);
       })
     }
+
+    this.displayData = () => {
+      let arr = [];
+      const collection = database.collection("text");
+      collection.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          arr = [...arr, doc.data()];
+        });
+        this.setState({
+          data: arr
+        })
+      })
+    }
   }
   render() {
     const arr = [10, 100, 1000, 10000];
+    const { data } = this.state;
     return (
       <View style={styles.container}>
         <Text>I'm the Todo list component</Text>
         {arr.map((n, i) => <Button key={i} title={`Submit ${n}`} onPress={() => this.handleSubmit(n)}/>)}
+        <Button
+          title="Read Data"
+          onPress={this.displayData}/>
+        {data.map((d, i) => (
+          <View key={i}>
+            <Text>{d.first}</Text>
+            <Text>{d.born}</Text>
+          </View>
+        ))}
       </View>
     );
   }
